@@ -1,0 +1,38 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: Api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: product-service
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/products/**
+            - id: inventory-service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/inventory/**
+            - id: order-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/orders/**
+  security:
+    user:
+      name: user
+      password: password
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
+cors:
+  allowed-origins: "*"
+  allowed-methods: "GET, POST, PUT, DELETE, OPTIONS"
+  allowed-headers: "*"
+  allow-credentials: true
+  max-age: 3600
