@@ -7,6 +7,7 @@ import com.sabbir.microservices.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -34,4 +35,12 @@ public class OrderService {
 
 
     }
+
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
 }
+
+
+
